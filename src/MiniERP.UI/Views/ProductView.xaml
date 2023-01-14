@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="MiniERP.UI.Views.ProductView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MiniERP.UI.Views"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             mvvm:ViewModelLocator.AutoWireViewModel="True">
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding GetProductsCommand}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <Grid Margin="5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" ></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Button  Margin="5" Grid.Row="0" Grid.Column="0" Command="{Binding AddButtonCommand}">
+            Adicionar
+        </Button>
+
+        <Button Margin="5" Grid.Row="0" Grid.Column="1" Command="{Binding EditButtonCommand}">
+            Editar
+        </Button>
+
+        <Button Margin="5" Grid.Row="0" Grid.Column="2" Command="{Binding RemoveButtonCommand}">
+            Remover
+        </Button>
+
+        <DataGrid Margin="5"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="3"
+                  Grid.Column="0"
+                  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedUser }"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  SelectionMode="Extended"
+                  IsReadOnly="True"
+                  SelectionUnit="FullRow"
+                  CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Nome"/>
+                <DataGridTextColumn Binding="{Binding Password}" Header="Senha"/>
+                <DataGridTextColumn Binding="{Binding Active}" Header="Ativo"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
