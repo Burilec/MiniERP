@@ -4,21 +4,36 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:regions="http://prismlibrary.com/"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       regions:ViewModelLocator.AutoWireViewModel="True"
-      >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{x:Null}" x:ClassModifier="internal">
+    <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" Margin="25" materialDesign:ElevationAssist.Elevation="Dp4">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
-            <MenuItem Header="Cadastro" >
-                <MenuItem Header="Produto" Command="{Binding MenuCommand}" CommandParameter="Product"/>
-            </MenuItem>
-        </Menu>
-        <ContentControl Grid.Row="1" regions:RegionManager.RegionName="MainRegion"/>
-    </Grid>
+            <Menu Grid.Row="0">
+                <MenuItem Header="Cadastro" >
+                    <MenuItem Header="Produto" Command="{Binding MenuCommand}" CommandParameter="Product"/>
+                    <MenuItem Header="Unit" Command="{Binding MenuCommand}" CommandParameter="Unidade" IsEnabled="False"/>
+                    <Separator></Separator>
+                    <MenuItem Header="Sair" Command="{Binding MenuCommand}" CommandParameter="Quit" />
+                </MenuItem>
+
+                <MenuItem Header="Entrada" Command="{Binding MenuCommand}" CommandParameter="In" IsEnabled="False"/>
+
+                <MenuItem Header="Saida" Command="{Binding MenuCommand}" CommandParameter="Out" IsEnabled="False"/>
+
+                <MenuItem Header="Estoque" Command="{Binding MenuCommand}" CommandParameter="Communication" IsEnabled="False"/>
+            </Menu>
+
+            <ContentControl Grid.Row="1" regions:RegionManager.RegionName="MainRegion"/>
+        </Grid>
+    </materialDesign:Card>
+
 </UserControl>
