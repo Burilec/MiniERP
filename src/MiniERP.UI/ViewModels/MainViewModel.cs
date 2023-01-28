@@ -1,11 +1,10 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using System.Windows.Controls;
 
 namespace MiniERP.UI.ViewModels
 {
-    public class MainViewModel : BindableBase
+    public sealed class MainViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
 
@@ -19,6 +18,14 @@ namespace MiniERP.UI.ViewModels
         }
 
         private void Navigate(string viewName)
-            => _regionManager.RequestNavigate("MainRegion", viewName + "View");
+            => _regionManager.RequestNavigate("MainRegion", viewName + "View", NavigationCallback);
+
+        private void NavigationCallback(NavigationResult navigationResult)
+        {
+            if (!navigationResult.Result.HasValue || navigationResult.Result.Value)
+                return;
+
+            throw navigationResult.Error;
+        }
     }
 }
