@@ -20,7 +20,7 @@
             <Menu Grid.Row="0">
                 <MenuItem Header="Cadastro" >
                     <MenuItem Header="Produto" Command="{Binding MenuCommand}" CommandParameter="Product"/>
-                    <MenuItem Header="Unit" Command="{Binding MenuCommand}" CommandParameter="Unidade" IsEnabled="False"/>
+                    <MenuItem Header="Unit" Command="{Binding MenuCommand}" CommandParameter="Unit"/>
                     <Separator></Separator>
                     <MenuItem Header="Sair" Command="{Binding MenuCommand}" CommandParameter="Quit" />
                 </MenuItem>
