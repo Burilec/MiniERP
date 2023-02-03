@@ -12,7 +12,7 @@
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding GetViewCommand}" />
+            <b:InvokeCommandAction Command="{Binding GetUnitCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
 
