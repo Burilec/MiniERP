@@ -8,7 +8,7 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             mvvm:ViewModelLocator.AutoWireViewModel="True">
+             mvvm:ViewModelLocator.AutoWireViewModel="True" x:ClassModifier="internal">
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -45,8 +45,8 @@
                   Grid.Row="1"
                   Grid.ColumnSpan="3"
                   Grid.Column="0"
-                  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                  SelectedItem="{Binding SelectedUser }"
+                  ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedItem }"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   SelectionMode="Extended"
@@ -55,8 +55,8 @@
                   CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Nome"/>
-                <DataGridTextColumn Binding="{Binding Password}" Header="Senha"/>
-                <DataGridTextColumn Binding="{Binding Active}" Header="Ativo"/>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Descricao"/>
+                <DataGridTextColumn Binding="{Binding Unit}" Header="Unidade"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

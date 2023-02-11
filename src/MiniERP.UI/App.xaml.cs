@@ -6,11 +6,10 @@ using System.Windows;
 
 namespace MiniERP.UI
 {
-    public partial class App
+    internal sealed partial class App
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-        }
+            => containerRegistry.RegisterDialogs();
 
         protected override Window CreateShell()
             => Container.Resolve<MainWindow>();

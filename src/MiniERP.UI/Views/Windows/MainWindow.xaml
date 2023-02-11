@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:MiniERP.UI.Views.Windows"
         xmlns:views="clr-namespace:MiniERP.UI.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        AllowsTransparency="False"
+        WindowStyle="SingleBorderWindow"
+        Background="{x:Null}"
+
+        SizeToContent="Manual"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        >
     <Grid>
         <views:MainView></views:MainView>
     </Grid>

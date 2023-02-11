@@ -1,60 +1,98 @@
 ﻿using MiniERP.Models;
+using MiniERP.UI.ViewModels.Dialogs.Constants;
 using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 
 namespace MiniERP.UI.ViewModels
 {
-    public class ProductViewModel : BindableBase
+    public sealed class ProductViewModel : BindableBase
     {
-        private Product _selectProduct;
-        public ObservableCollection<Product> Products { get; set; }
+        private readonly IDialogService _dialogService;
+        private Product? _selectProduct;
+        private ObservableCollection<Product> _items = null!;
 
-        public Product SelectProduct
+        public ObservableCollection<Product> Items
+        {
+            get => _items;
+            set => SetProperty(ref _items, value);
+        }
+
+        public Product? SelectedItem
         {
             get => _selectProduct;
             set => SetProperty(ref _selectProduct, value);
         }
 
-        public DelegateCommand AddButtonCommand { get; set; }
-        public DelegateCommand EditButtonCommand { get; set; }
-        public DelegateCommand RemoveButtonCommand { get; set; }
-        public DelegateCommand GetProductsCommand { get; set; }
+        public DelegateCommand AddButtonCommand { get; }
+        public DelegateCommand EditButtonCommand { get; }
+        public DelegateCommand RemoveButtonCommand { get; }
+        public DelegateCommand GetProductsCommand { get; }
 
-        public ProductViewModel()
+        public ProductViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService;
+
             AddButtonCommand = new DelegateCommand(HandleAddButtonCommand);
-            EditButtonCommand = new DelegateCommand(HandleEditButtonCommand, () => SelectProduct != null).ObservesProperty(() => SelectProduct);
-            RemoveButtonCommand = new DelegateCommand(async () => await HandleRemoveButtonCommandAsync(), () => SelectProduct != null).ObservesProperty(() => SelectProduct);
-            GetProductsCommand = new DelegateCommand(async () => await HandleGetUsersCommandAsync());
+            EditButtonCommand = new DelegateCommand(HandleEditButtonCommand, () => SelectedItem != null).ObservesProperty(() => SelectedItem);
+            RemoveButtonCommand = new DelegateCommand(HandleRemoveButtonCommandAsync, () => SelectedItem != null).ObservesProperty(() => SelectedItem);
+            GetProductsCommand = new DelegateCommand(HandleGetUsersCommandAsync);
         }
 
-        private async Task HandleGetUsersCommandAsync()
+        private void HandleGetUsersCommandAsync()
         {
-            //Chama uma api
+            //Todo: Chama a API ou local
 
-            //Products = new ObservableCollection<Product>()
-
-            //throw new NotImplementedException();
+            Items = new ObservableCollection<Product>();
         }
 
-        private async Task HandleRemoveButtonCommandAsync()
+        private void HandleRemoveButtonCommandAsync()
         {
-            //Chama a API para remove
+            //Todo: Enviar para API ou salvar local
 
-            Products.Remove(SelectProduct);
+            ArgumentNullException.ThrowIfNull(SelectedItem);
+
+            Items.Remove(SelectedItem);
         }
 
         private void HandleEditButtonCommand()
         {
-            throw new System.NotImplementedException();
+            ArgumentNullException.ThrowIfNull(SelectedItem);
+
+            _dialogService.ShowDialog(DialogNames.AddOrEditProductDialogName, new DialogParameters {{nameof(Product), SelectedItem}}, EditButtonCommandCallbackAsync);
+        }
+
+        private void EditButtonCommandCallbackAsync(IDialogResult dialogResult)
+        {
+            if (dialogResult.Result != ButtonResult.OK)
+                return;
+
+            var product = dialogResult.Parameters.GetValue<Product>(nameof(Product));
+
+            //Todo: Enviar para API ou salvar local
+
+            ArgumentNullException.ThrowIfNull(SelectedItem);
+
+            Items.Remove(SelectedItem);
+            Items.Add(product);
+            SelectedItem = product;
         }
 
         private void HandleAddButtonCommand()
+            => _dialogService.ShowDialog(DialogNames.AddOrEditProductDialogName, AddButtonCommandCallback);
+
+        private void AddButtonCommandCallback(IDialogResult dialogResult)
         {
-            throw new System.NotImplementedException();
+            if (dialogResult.Result != ButtonResult.OK)
+                return;
+
+            var product = dialogResult.Parameters.GetValue<Product>(nameof(Product));
+
+            //Todo: Enviar para API ou salvar local
+
+            Items.Add(product);
         }
     }
 }
