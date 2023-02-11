@@ -89,6 +89,7 @@ namespace MiniERP.UI.ViewModels.Dialogs.AddOrEdits
             Name = _unit.Name;
             Description = _unit.Description;
         }
+
         public event Action<IDialogResult> RequestClose = null!;
     }
 }

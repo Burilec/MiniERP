@@ -25,7 +25,7 @@ namespace MiniERP.UI.ViewModels
             get => _selectUnit;
             set => SetProperty(ref _selectUnit, value);
         }
-                         
+
         public DelegateCommand AddButtonCommand { get; }
         public DelegateCommand EditButtonCommand { get; }
         public DelegateCommand RemoveButtonCommand { get; }
@@ -61,7 +61,7 @@ namespace MiniERP.UI.ViewModels
         {
             ArgumentNullException.ThrowIfNull(SelectedItem);
 
-            _dialogService.ShowDialog(DialogNames.AddOrEditUnitDialogName, new DialogParameters {{nameof(Unit), SelectedItem}}, EditButtonCommandCallbackAsync);
+            _dialogService.ShowDialog(DialogNames.AddOrEditUnitDialogName, new DialogParameters { { nameof(Unit), SelectedItem } }, EditButtonCommandCallbackAsync);
         }
 
         private void EditButtonCommandCallbackAsync(IDialogResult dialogResult)
