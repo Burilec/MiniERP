@@ -1,6 +1,6 @@
 ### Work Tracking
 
-- [ID da issue](https://github.com/Burilec/MiniERP/issues/ID da issue)
+- [ID_da_issue](https://github.com/Burilec/MiniERP/issues/ID_da_issue)
 
 ## Which problem is this PR solving?
 
