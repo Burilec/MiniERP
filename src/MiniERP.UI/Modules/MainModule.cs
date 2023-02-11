@@ -16,6 +16,8 @@ namespace MiniERP.UI.Modules
             var regionManager = containerProvider.Resolve<IRegionManager>();
 
             regionManager.RegisterViewWithRegion("MainRegion", typeof(ProductView));
+
+            regionManager.RegisterViewWithRegion("MainRegion", typeof(UnitView));
         }
     }
 }

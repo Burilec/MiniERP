@@ -13,6 +13,8 @@ namespace MiniERP.UI.Modules
             containerRegistry.RegisterDialogWindow<DialogWindow>();
 
             containerRegistry.RegisterDialog<AddOrEditProductDialogView, AddOrEditProductDialogViewModel>(DialogNames.AddOrEditProductDialogName);
+
+            containerRegistry.RegisterDialog<AddOrEditUnitDialogView, AddOrEditUnitDialogViewModel>(DialogNames.AddOrEditUnitDialogName);
         }
     }
 }
